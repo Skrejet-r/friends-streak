@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { DayData } from '../utils/dateUtils';
 
 interface DayCardProps {
@@ -17,15 +16,8 @@ export default function DayCard({ day, index, onClick }: DayCardProps) {
   };
 
   return (
-    <motion.div
+    <div
       className={`day-card ${day.hasMet ? 'met' : ''}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{
-        delay: index * 0.02,
-        duration: 0.2,
-      }}
     >
       <div
         className="day-content"
@@ -33,17 +25,15 @@ export default function DayCard({ day, index, onClick }: DayCardProps) {
         onTouchEnd={handleClick}
       >
         <div className="day-name">{dayOfWeek}</div>
-        <motion.div
-          className="day-number"
-        >
+        <div className="day-number">
           {day.date.getDate()}
-        </motion.div>
+        </div>
         {day.hasMet && (
           <div className="checkmark">
             ⛧
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getWeekData, formatWeekRange, getDateFromWeekOffset, getWeeksFromStart, getToday } from '../utils/dateUtils';
 import { isMetDay, toggleMetDay } from '../utils/storage';
@@ -119,59 +118,49 @@ export default function WeekSlider() {
     <div className="week-slider-container">
       <StatsCard weekStreak={weekStreak} totalDays={totalDays} />
       
-      <motion.div
+      <div
         className="week-card"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
         <div className="week-header">
-          <motion.button
+          <button
             className="nav-button"
             onClick={goToPreviousWeek}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            type="button"
           >
             <ChevronLeft size={24} />
-          </motion.button>
+          </button>
           
-          <motion.h2
+          <h2
             key={currentWeekOffset}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
             className="week-title"
           >
             {formatWeekRange(weekData.startDate, weekData.endDate)}
-          </motion.h2>
+          </h2>
           
-          <motion.button
+          <button
             className="nav-button"
             onClick={goToNextWeek}
             disabled={currentWeekOffset >= getWeeksFromStart(today)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            type="button"
           >
             <ChevronRight size={24} />
-          </motion.button>
+          </button>
         </div>
 
         <div className="days-grid">
-          <AnimatePresence mode="wait">
-            {weekDays.map((day, index) => (
-              <DayCard
-                key={day.date.toISOString()}
-                day={day}
-                index={index}
-                onClick={() => handleDayClick(day.date)}
-              />
-            ))}
-          </AnimatePresence>
+          {weekDays.map((day, index) => (
+            <DayCard
+              key={day.date.toISOString()}
+              day={day}
+              index={index}
+              onClick={() => handleDayClick(day.date)}
+            />
+          ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -21,19 +21,26 @@
   --glow-red: #ff0000;
 }
 
+html {
+  background: #000000;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: 'Courier New', 'Monaco', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.2) 0%, transparent 50%),
-    linear-gradient(180deg, #000000 0%, #0a0000 50%, #000000 100%);
+  background: #000000;
   background-attachment: fixed;
   min-height: 100vh;
+  height: 100vh;
   color: var(--text-primary);
-  overflow-x: hidden;
-  position: relative;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 body::before {
@@ -67,16 +74,44 @@ body::before {
 }
 
 @media (max-width: 768px) {
+  html, body {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+  }
+  
   #root {
     padding: 10px;
     align-items: flex-start;
     padding-top: 10px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 100vh;
+  }
+  
+  body::before {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
+  html, body {
+    overflow: hidden;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+  }
+  
   #root {
     padding: 8px;
     padding-top: 8px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 100vh;
+  }
+  
+  body::before {
+    display: none;
   }
 }
