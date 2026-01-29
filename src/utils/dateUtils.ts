@@ -1,4 +1,4 @@
-import { startOfWeek, endOfWeek, eachDayOfInterval, format, addWeeks, subWeeks, isSameDay, parseISO } from 'date-fns';
+import { startOfWeek, endOfWeek, eachDayOfInterval, format, addWeeks, isSameDay } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
 export const START_DATE = new Date('2026-01-01');

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { getWeekData, formatWeekRange, getDateFromWeekOffset, getWeeksFromStart, START_DATE, getToday } from '../utils/dateUtils';
+import { getWeekData, formatWeekRange, getDateFromWeekOffset, getWeeksFromStart, getToday } from '../utils/dateUtils';
 import { isMetDay, toggleMetDay } from '../utils/storage';
 import { calculateWeekStreak, getTotalMetDays } from '../utils/streakUtils';
 import DayCard from './DayCard';

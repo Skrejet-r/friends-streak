@@ -1,4 +1,4 @@
-import { startOfWeek, isSameWeek, parseISO, subWeeks } from 'date-fns';
+import { startOfWeek, parseISO, subWeeks } from 'date-fns';
 import { START_DATE, getWeekStart } from './dateUtils';
 import { loadMetDays } from './storage';
 

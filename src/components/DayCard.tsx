@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { formatDate } from '../utils/dateUtils';
 import { DayData } from '../utils/dateUtils';
 
 interface DayCardProps {
@@ -9,7 +8,6 @@ interface DayCardProps {
 }
 
 export default function DayCard({ day, index, onClick }: DayCardProps) {
-  const dayName = formatDate(day.date);
   const dayOfWeek = day.date.toLocaleDateString('ru-RU', { weekday: 'short' });
 
   return (
