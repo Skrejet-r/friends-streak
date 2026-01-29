@@ -61,24 +61,40 @@ export default function WeekSlider() {
     }
   };
 
-  // Swipe-Handler
-  const minSwipeDistance = 50;
+  // Swipe-Handler - nur auf dem Header, nicht auf den Tagen
+  const minSwipeDistance = 80;
+  const touchStartY = useRef<number | null>(null);
 
   const onTouchStart = (e: React.TouchEvent) => {
+    // Nur Swipe auf dem Header, nicht auf den Tagen
+    const target = e.target as HTMLElement;
+    if (target.closest('.days-grid') || target.closest('.day-card')) {
+      return;
+    }
     touchEndX.current = null;
     touchStartX.current = e.targetTouches[0].clientX;
+    touchStartY.current = e.targetTouches[0].clientY;
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('.days-grid') || target.closest('.day-card')) {
+      return;
+    }
     touchEndX.current = e.targetTouches[0].clientX;
   };
 
   const onTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
+    if (!touchStartX.current || !touchEndX.current || !touchStartY.current) return;
     
-    const distance = touchStartX.current - touchEndX.current;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+    const distanceX = touchStartX.current - touchEndX.current;
+    const distanceY = Math.abs((touchStartY.current || 0) - (touchEndX.current || 0));
+    
+    // Nur horizontal swipen, nicht vertikal
+    if (Math.abs(distanceX) < Math.abs(distanceY)) return;
+    
+    const isLeftSwipe = distanceX > minSwipeDistance;
+    const isRightSwipe = distanceX < -minSwipeDistance;
 
     if (isLeftSwipe) {
       goToNextWeek();
@@ -86,6 +102,11 @@ export default function WeekSlider() {
     if (isRightSwipe) {
       goToPreviousWeek();
     }
+    
+    // Reset
+    touchStartX.current = null;
+    touchEndX.current = null;
+    touchStartY.current = null;
   };
 
   // weekDays wird automatisch aktualisiert, da isMetDay() immer die neuesten Daten aus localStorage liest

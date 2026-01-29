@@ -292,9 +292,10 @@
   aspect-ratio: 1;
   cursor: pointer;
   border-radius: 16px;
-  overflow: hidden;
-  -webkit-tap-highlight-color: rgba(255, 0, 0, 0.2);
+  overflow: visible;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0.3);
   touch-action: manipulation;
+  position: relative;
 }
 
 .day-content {
@@ -307,14 +308,24 @@
   position: relative;
   border: 3px solid #330000;
   border-radius: 0;
-  transition: all 0.3s;
+  transition: all 0.2s;
   padding: 12px;
   background: 
     radial-gradient(circle at center, rgba(139, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.9) 100%);
   clip-path: polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%);
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
   pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0.4);
+}
+
+.day-content:active {
+  transform: scale(0.95);
+  background: 
+    radial-gradient(circle at center, rgba(255, 0, 0, 0.2) 0%, rgba(139, 0, 0, 0.3) 100%);
 }
 
 .day-card.met .day-content {
@@ -553,22 +564,24 @@
   }
 
   .days-grid {
-    gap: 8px;
+    gap: 10px;
     grid-template-columns: repeat(7, 1fr);
   }
 
   .day-card {
-    min-height: 75px;
+    min-height: 90px;
     touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(255, 0, 0, 0.3);
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0.4);
   }
 
   .day-content {
-    padding: 10px 6px;
-    border-width: 2px;
+    padding: 12px 8px;
+    border-width: 3px;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    min-height: 90px;
   }
 
   .day-name {
@@ -672,15 +685,17 @@
   }
 
   .days-grid {
-    gap: 6px;
+    gap: 8px;
   }
 
   .day-card {
-    min-height: 70px;
+    min-height: 85px;
   }
 
   .day-content {
-    padding: 8px 4px;
+    padding: 10px 6px;
+    min-height: 85px;
+    border-width: 3px;
   }
 
   .day-name {

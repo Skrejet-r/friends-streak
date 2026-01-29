@@ -10,7 +10,7 @@ interface DayCardProps {
 export default function DayCard({ day, index, onClick }: DayCardProps) {
   const dayOfWeek = day.date.toLocaleDateString('ru-RU', { weekday: 'short' });
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
+  const handleClick = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
     onClick();
@@ -19,26 +19,18 @@ export default function DayCard({ day, index, onClick }: DayCardProps) {
   return (
     <motion.div
       className={`day-card ${day.hasMet ? 'met' : ''}`}
-      initial={{ opacity: 0, scale: 0.8, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{
-        delay: index * 0.05,
-        type: 'spring',
-        stiffness: 200,
-        damping: 20,
+        delay: index * 0.02,
+        duration: 0.2,
       }}
-      whileHover={{ 
-        scale: 1.1, 
-        y: -8,
-        rotate: [0, -5, 5, 0]
-      }}
-      whileTap={{ scale: 0.95 }}
-      onClick={onClick}
-      onTouchEnd={handleTouchEnd}
     >
-      <motion.div
+      <div
         className="day-content"
+        onClick={handleClick}
+        onTouchEnd={handleClick}
       >
         <div className="day-name">{dayOfWeek}</div>
         <motion.div
@@ -47,23 +39,11 @@ export default function DayCard({ day, index, onClick }: DayCardProps) {
           {day.date.getDate()}
         </motion.div>
         {day.hasMet && (
-          <motion.div
-            className="checkmark"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ 
-              scale: [0, 1.2, 1],
-              rotate: [180, 0],
-            }}
-            transition={{ 
-              type: 'spring', 
-              stiffness: 300,
-              damping: 15
-            }}
-          >
+          <div className="checkmark">
             ⛧
-          </motion.div>
+          </div>
         )}
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
