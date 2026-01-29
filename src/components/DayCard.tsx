@@ -2,11 +2,10 @@ import { DayData } from '../utils/dateUtils';
 
 interface DayCardProps {
   day: DayData;
-  index: number;
   onClick: () => void;
 }
 
-export default function DayCard({ day, index, onClick }: DayCardProps) {
+export default function DayCard({ day, onClick }: DayCardProps) {
   const dayOfWeek = day.date.toLocaleDateString('ru-RU', { weekday: 'short' });
 
   const handleClick = (e: React.MouseEvent | React.TouchEvent) => {

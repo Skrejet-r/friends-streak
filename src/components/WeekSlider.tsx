@@ -151,11 +151,10 @@ export default function WeekSlider() {
         </div>
 
         <div className="days-grid">
-          {weekDays.map((day, index) => (
+          {weekDays.map((day) => (
             <DayCard
               key={day.date.toISOString()}
               day={day}
-              index={index}
               onClick={() => handleDayClick(day.date)}
             />
           ))}
