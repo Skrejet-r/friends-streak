@@ -5,6 +5,7 @@ import { isMetDay, toggleMetDay } from '../utils/storage';
 import { calculateWeekStreak, getTotalMetDays } from '../utils/streakUtils';
 import DayCard from './DayCard';
 import StatsCard from './StatsCard';
+import MonthCalendar from './MonthCalendar';
 
 export default function WeekSlider() {
   const today = getToday();
@@ -117,6 +118,7 @@ export default function WeekSlider() {
   return (
     <div className="week-slider-container">
       <StatsCard weekStreak={weekStreak} totalDays={totalDays} />
+      <MonthCalendar currentDate={currentDate} />
       
       <div
         className="week-card"

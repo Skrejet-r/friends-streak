@@ -53,7 +53,93 @@
 .week-slider-container {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
+}
+
+.month-calendar {
+  background: 
+    radial-gradient(circle at center, rgba(139, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.9) 100%),
+    linear-gradient(135deg, #1a0000 0%, #000000 100%);
+  border: 3px solid #8b0000;
+  border-radius: 0;
+  padding: 16px;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 0, 0.3),
+    inset 0 0 20px rgba(139, 0, 0, 0.2);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.month-calendar-header {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ff0000;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px #ff0000;
+  font-family: 'Courier New', monospace;
+}
+
+.month-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.month-weekday {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #8b0000;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 0;
+}
+
+.month-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.month-day {
+  aspect-ratio: 1;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #330000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 24px;
+}
+
+.month-day.empty {
+  background: transparent;
+  border: none;
+}
+
+.month-day.met {
+  background: #ff0000;
+  border-color: #ff0000;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+.month-day.today {
+  border-color: #ff0000;
+  border-width: 2px;
+}
+
+.month-day-number {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.month-day.met .month-day-number {
+  color: #000000;
+  font-weight: 900;
 }
 
 .stats-container {
@@ -439,7 +525,39 @@
   .stats-container {
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+  }
+
+  .month-calendar {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .month-calendar-header {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  .month-calendar-weekdays {
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+
+  .month-weekday {
+    font-size: 0.6rem;
+    padding: 3px 0;
+  }
+
+  .month-calendar-grid {
+    gap: 2px;
+  }
+
+  .month-day {
+    min-height: 20px;
+  }
+
+  .month-day-number {
+    font-size: 0.6rem;
   }
 
   .stat-card {
@@ -620,6 +738,38 @@
 
   .stats-container {
     gap: 12px;
+  }
+
+  .month-calendar {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .month-calendar-header {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+
+  .month-calendar-weekdays {
+    gap: 2px;
+    margin-bottom: 5px;
+  }
+
+  .month-weekday {
+    font-size: 0.55rem;
+    padding: 2px 0;
+  }
+
+  .month-calendar-grid {
+    gap: 2px;
+  }
+
+  .month-day {
+    min-height: 18px;
+  }
+
+  .month-day-number {
+    font-size: 0.55rem;
   }
 
   .stat-card {
