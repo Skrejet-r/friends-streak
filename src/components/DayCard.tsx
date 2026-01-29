@@ -10,6 +10,12 @@ interface DayCardProps {
 export default function DayCard({ day, index, onClick }: DayCardProps) {
   const dayOfWeek = day.date.toLocaleDateString('ru-RU', { weekday: 'short' });
 
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClick();
+  };
+
   return (
     <motion.div
       className={`day-card ${day.hasMet ? 'met' : ''}`}
@@ -27,8 +33,9 @@ export default function DayCard({ day, index, onClick }: DayCardProps) {
         y: -8,
         rotate: [0, -5, 5, 0]
       }}
-      whileTap={{ scale: 0.9, rotate: 180 }}
+      whileTap={{ scale: 0.95 }}
       onClick={onClick}
+      onTouchEnd={handleTouchEnd}
     >
       <motion.div
         className="day-content"

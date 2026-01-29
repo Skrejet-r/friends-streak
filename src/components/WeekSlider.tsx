@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { getWeekData, formatWeekRange, getDateFromWeekOffset, getWeeksFromStart, getToday } from '../utils/dateUtils';
@@ -14,6 +14,10 @@ export default function WeekSlider() {
   const [metDays, setMetDays] = useState<string[]>([]);
   const [weekStreak, setWeekStreak] = useState(0);
   const [totalDays, setTotalDays] = useState(0);
+  
+  // Swipe-Gesten
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   const currentDate = getDateFromWeekOffset(currentWeekOffset);
   const weekData = getWeekData(currentDate);
@@ -57,6 +61,33 @@ export default function WeekSlider() {
     }
   };
 
+  // Swipe-Handler
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchEndX.current = null;
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNextWeek();
+    }
+    if (isRightSwipe) {
+      goToPreviousWeek();
+    }
+  };
+
   // weekDays wird automatisch aktualisiert, da isMetDay() immer die neuesten Daten aus localStorage liest
   const weekDays = weekData.days.map(day => ({
     ...day,
@@ -72,6 +103,9 @@ export default function WeekSlider() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       >
         <div className="week-header">
           <motion.button
