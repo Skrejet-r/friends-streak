@@ -34,8 +34,11 @@ npm run build
 
 ### Automatisches Deployment (empfohlen)
 
-1. Erstelle ein GitHub Repository mit dem Namen `FriendStreak`
-2. Pushe den Code:
+**WICHTIG:** Du musst diese Schritte in der richtigen Reihenfolge ausführen!
+
+1. **Erstelle ein GitHub Repository** mit dem Namen `FriendStreak` (oder einem anderen Namen - dann passe `vite.config.ts` an!)
+
+2. **Pushe den Code:**
    ```bash
    git init
    git add .
@@ -45,18 +48,35 @@ npm run build
    git push -u origin main
    ```
 
-3. Gehe zu Repository Settings → Pages
-4. Unter "Source" wähle "GitHub Actions"
-5. Der GitHub Actions Workflow wird automatisch bei jedem Push auf `main` die App deployen
-6. Die App ist dann verfügbar unter: `https://DEIN-USERNAME.github.io/FriendStreak/`
+3. **Aktiviere GitHub Pages:**
+   - Gehe zu deinem Repository auf GitHub
+   - Klicke auf **Settings** (oben im Menü)
+   - Scrolle runter zu **Pages** (links in der Sidebar)
+   - Unter **Source** wähle **"GitHub Actions"** (NICHT "Deploy from a branch"!)
+   - Klicke **Save**
 
-### Manuelles Deployment
+4. **Der erste Deployment:**
+   - Gehe zu **Actions** Tab in deinem Repository
+   - Du solltest den Workflow "Deploy to GitHub Pages" sehen
+   - Falls er nicht automatisch läuft, klicke auf den Workflow und dann **"Run workflow"**
+   - Warte bis der Workflow grün wird (ca. 2-3 Minuten)
+
+5. **Fertig!** Die App ist dann verfügbar unter:
+   `https://DEIN-USERNAME.github.io/FriendStreak/`
+
+**Ab jetzt:** Bei jedem Push auf `main` wird automatisch neu deployed! 🚀
+
+### Manuelles Deployment (Alternative)
+
+Falls du GitHub Actions nicht nutzen willst:
 
 ```bash
 npm run deploy
 ```
 
-**Wichtig:** Falls dein Repository einen anderen Namen hat, ändere in `vite.config.ts` den `base` Pfad entsprechend!
+Dann in GitHub Settings → Pages → Source wähle "Deploy from a branch" → Branch: `gh-pages`
+
+**Wichtig:** Falls dein Repository einen anderen Namen hat, ändere in `vite.config.ts` den `base` Pfad von `/FriendStreak/` auf `/DEIN-REPO-NAME/`!
 
 ## Speicherung
 
