@@ -14,6 +14,10 @@ export default function DayCard({ day, onClick }: DayCardProps) {
     onClick();
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation();
+  };
+
   return (
     <div
       className={`day-card ${day.hasMet ? 'met' : ''}`}
@@ -21,6 +25,7 @@ export default function DayCard({ day, onClick }: DayCardProps) {
       <div
         className="day-content"
         onClick={handleClick}
+        onTouchStart={handleTouchStart}
         onTouchEnd={handleClick}
       >
         <div className="day-name">{dayOfWeek}</div>

@@ -21,15 +21,6 @@
     0 0 70px #8b0000;
   position: relative;
   font-family: 'Courier New', monospace;
-  animation: flicker 3s infinite alternate;
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
-  51% { opacity: 0.9; }
-  52% { opacity: 0.7; }
-  53% { opacity: 1; }
 }
 
 .app-title::before {
@@ -39,7 +30,6 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  animation: rotate 4s linear infinite;
 }
 
 .app-title::after {
@@ -49,12 +39,13 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  animation: rotate 4s linear infinite reverse;
 }
 
-@keyframes rotate {
-  from { transform: translateY(-50%) rotate(0deg); }
-  to { transform: translateY(-50%) rotate(360deg); }
+@media (max-width: 768px) {
+  .app-title::before,
+  .app-title::after {
+    display: none;
+  }
 }
 
 .week-slider-container {
@@ -344,20 +335,6 @@
   box-shadow: 
     0 0 20px rgba(255, 0, 0, 0.6),
     inset 0 0 20px rgba(255, 0, 0, 0.2);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { 
-    box-shadow: 
-      0 0 20px rgba(255, 0, 0, 0.6),
-      inset 0 0 20px rgba(255, 0, 0, 0.2);
-  }
-  50% { 
-    box-shadow: 
-      0 0 30px rgba(255, 0, 0, 0.9),
-      inset 0 0 30px rgba(255, 0, 0, 0.4);
-  }
 }
 
 .day-name {
@@ -410,61 +387,9 @@
   text-shadow: 0 0 5px #ff0000;
 }
 
-/* Zufällige Glitch-Effekte */
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
-}
+/* Glitch-Effekte entfernt für bessere Performance */
 
-.stat-card:hover {
-  animation: glitch 0.3s infinite;
-}
-
-.week-card:hover {
-  animation: glitch 0.5s infinite;
-}
-
-/* Zufällige Partikel-Effekte */
-.day-card.met::before {
-  content: '';
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #ff0000;
-  border-radius: 50%;
-  top: 10%;
-  left: 20%;
-  animation: float 3s ease-in-out infinite;
-  box-shadow: 
-    0 0 10px #ff0000,
-    0 0 20px #ff0000;
-}
-
-.day-card.met::after {
-  content: '';
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: #ff0000;
-  border-radius: 50%;
-  top: 70%;
-  right: 15%;
-  animation: float 2s ease-in-out infinite reverse;
-  box-shadow: 
-    0 0 8px #ff0000,
-    0 0 16px #ff0000;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.8; }
-  25% { transform: translateY(-10px) translateX(5px); opacity: 1; }
-  50% { transform: translateY(-5px) translateX(-5px); opacity: 0.6; }
-  75% { transform: translateY(-15px) translateX(3px); opacity: 0.9; }
-}
+/* Partikel-Effekte entfernt für bessere Performance */
 
 @media (max-width: 768px) {
   .app {
@@ -573,24 +498,34 @@
   }
 
   .days-grid {
-    gap: 10px;
+    gap: 6px;
     grid-template-columns: repeat(7, 1fr);
   }
 
   .day-card {
-    min-height: 90px;
+    min-height: 60px;
     touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(255, 0, 0, 0.4);
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0.5);
+    position: relative;
+    z-index: 5;
   }
 
   .day-content {
-    padding: 12px 8px;
-    border-width: 3px;
+    padding: 8px 4px;
+    border-width: 2px;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
-    min-height: 90px;
+    min-height: 60px;
+    pointer-events: auto !important;
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0.6);
+  }
+  
+  .day-content:active {
+    background: 
+      radial-gradient(circle at center, rgba(255, 0, 0, 0.4) 0%, rgba(139, 0, 0, 0.3) 100%) !important;
+    transform: scale(0.95);
   }
 
   .day-name {
@@ -694,17 +629,24 @@
   }
 
   .days-grid {
-    gap: 8px;
+    gap: 5px;
   }
 
   .day-card {
-    min-height: 85px;
+    min-height: 55px;
   }
 
   .day-content {
-    padding: 10px 6px;
-    min-height: 85px;
-    border-width: 3px;
+    padding: 6px 3px;
+    min-height: 55px;
+    border-width: 2px;
+    pointer-events: auto !important;
+  }
+  
+  .day-content:active {
+    background: 
+      radial-gradient(circle at center, rgba(255, 0, 0, 0.4) 0%, rgba(139, 0, 0, 0.3) 100%) !important;
+    transform: scale(0.95);
   }
 
   .day-name {
