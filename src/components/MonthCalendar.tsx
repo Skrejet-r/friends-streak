@@ -1,4 +1,4 @@
-import { getDaysInMonth, startOfMonth, eachDayOfInterval, format, isSameMonth, getDay } from 'date-fns';
+import { getDaysInMonth, startOfMonth, eachDayOfInterval, format, getDay } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { isMetDay } from '../utils/storage';
 
