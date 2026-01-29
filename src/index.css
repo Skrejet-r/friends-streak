@@ -24,7 +24,14 @@
 html {
   background: #000000;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -36,11 +43,14 @@ body {
   min-height: 100vh;
   height: 100vh;
   color: var(--text-primary);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: fixed;
   width: 100%;
+  max-width: 100vw;
   top: 0;
   left: 0;
+  box-sizing: border-box;
 }
 
 body::before {

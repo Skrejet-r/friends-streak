@@ -3,6 +3,8 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .app-title {
@@ -286,16 +288,21 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .day-card {
   aspect-ratio: 1;
   cursor: pointer;
   border-radius: 16px;
-  overflow: visible;
+  overflow: hidden;
   -webkit-tap-highlight-color: rgba(255, 0, 0, 0.3);
   touch-action: manipulation;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .day-content {
@@ -387,7 +394,15 @@
   text-shadow: 0 0 5px #ff0000;
 }
 
-/* Glitch-Effekte entfernt für bessere Performance */
+/* Glitch-Effekte für Statistik-Karten auf Mobile */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
 
 /* Partikel-Effekte entfernt für bessere Performance */
 
@@ -497,9 +512,24 @@
     height: 24px;
   }
 
+  .app {
+    padding: 12px;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .week-card {
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
   .days-grid {
-    gap: 6px;
-    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .day-card {
@@ -508,10 +538,13 @@
     -webkit-tap-highlight-color: rgba(255, 0, 0, 0.5);
     position: relative;
     z-index: 5;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .day-content {
-    padding: 8px 4px;
+    padding: 6px 2px;
     border-width: 2px;
     cursor: pointer;
     user-select: none;
@@ -520,12 +553,19 @@
     min-height: 60px;
     pointer-events: auto !important;
     -webkit-tap-highlight-color: rgba(255, 0, 0, 0.6);
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .day-content:active {
     background: 
       radial-gradient(circle at center, rgba(255, 0, 0, 0.4) 0%, rgba(139, 0, 0, 0.3) 100%) !important;
     transform: scale(0.95);
+  }
+
+  /* Glitch Animation nur für Statistik-Karten auf Mobile */
+  .stat-card {
+    animation: glitch 0.5s infinite;
   }
 
   .day-name {
@@ -628,19 +668,34 @@
     height: 22px;
   }
 
+  .app {
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
   .days-grid {
-    gap: 5px;
+    gap: 3px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .day-card {
     min-height: 55px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .day-content {
-    padding: 6px 3px;
+    padding: 5px 1px;
     min-height: 55px;
     border-width: 2px;
     pointer-events: auto !important;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .day-content:active {
