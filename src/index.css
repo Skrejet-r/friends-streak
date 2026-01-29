@@ -59,12 +59,24 @@ body::before {
 #root {
   position: relative;
   z-index: 1;
-}
-
-#root {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 10px;
+    align-items: flex-start;
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 8px;
+    padding-top: 8px;
+  }
 }
